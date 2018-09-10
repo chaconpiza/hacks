@@ -1,0 +1,38 @@
+Adding events visualization in kibana
+https://review.openstack.org/#/c/593602/
+
+[WIP] Use the tenant_id from context to name the index in ES
+https://review.openstack.org/#/c/600030/
+
+[WIP] Parse fields from envelope to create the index in ES
+https://review.openstack.org/#/c/600038/
+
+[WIP] Refactor devstack-plugin
+https://review.openstack.org/#/c/595555/
+
+[WIP] Add tests for events
+https://review.openstack.org/#/c/599575/
+
+
+
+git clone https://github.com/openstack/monasca-events-api.git
+cd monasca-events-api
+git fetch https://git.openstack.org/openstack/monasca-events-api refs/changes/55/595555/25 && git checkout FETCH_HEAD
+cd devsstack
+vim Vagrantfile
+**************************************************************************************************************************
+-enable_plugin monasca-events-api https://git.openstack.org/openstack/monasca-events-api
+-enable_plugin monasca-tempest-plugin https://git.openstack.org/openstack/monasca-tempest-plugin
+
++enable_plugin monasca-events-api https://git.openstack.org/openstack/monasca-events-api refs/changes/55/595555/25
++enable_plugin monasca-tempest-plugin https://git.openstack.org/openstack/monasca-tempest-plugin refs/changes/75/599575/2
++MONASCA_KIBANA_PLUGIN_BRANCH=refs/changes/02/593602/1
++MONASCA_PERSISTER_BRANCH=refs/changes/38/600038/3
+**************************************************************************************************************************
+
+vagrant up
+
+git clone https://github.com/martinchacon/hacks.git
+cd hacks
+python event_passing_eventtype.py Test1
+
