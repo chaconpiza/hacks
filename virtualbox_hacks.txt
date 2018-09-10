@@ -1,0 +1,6 @@
+monascavm=$(VBoxManage list runningvms |awk '{print $1;}' |xargs)
+echo $monascavm
+VBoxManage controlvm $monascavm natpf1 delete ssh
+VBoxManage controlvm $monascavm natpf1 "openstack0,tcp,,2222,192.168.10.6,22"
+VBoxManage controlvm $monascavm natpf1 "openstack1,tcp,,8088,192.168.10.6,80"
+
